@@ -757,6 +757,10 @@ bool RGNFile::extPolyObjects(Handle &hdl, const SubDiv *subdiv, quint32 shift,
 			poly.label = lbl->label(lblHdl, labelPtr & 0x3FFFFF, false, true,
 			  Style::isContourLine(poly.type));
 
+	    if (segmentType != Line) {
+           qWarning("%s: 0x%x , %f, %f xxxxx1111111", qPrintable(poly.label.text()), poly.type >> 8, c.lon(), c.lat());
+        }
+
 		polys->append(poly);
 	}
 
