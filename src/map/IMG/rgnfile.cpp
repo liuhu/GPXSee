@@ -633,6 +633,9 @@ bool RGNFile::polyObjects(Handle &hdl, const SubDiv *subdiv,
 				  true, Style::isContourLine(poly.type));
 		}
 
+        if (segmentType != Line) {
+            qWarning("%s: 0x%x , %f, %f line11111111", qPrintable(poly.label.text()), poly.type >> 8, c.lon(), c.lat());
+        }
 		polys->append(poly);
 	}
 
