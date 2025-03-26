@@ -576,10 +576,6 @@ bool RGNFile::polyObjects(Handle &hdl, const SubDiv *subdiv,
 	while (pos(hdl) < segment.end()) {
 		MapData::Poly poly;
 
-		if (segmentType != Line) {
-            qWarning("%s: 0x%x , %f, %f line22222222", qPrintable(poly.label.text()), poly.type >> 8, c.lon(), c.lat());
-        }
-
 		if (!(readByte(hdl, &type) && readUInt24(hdl, labelPtr)
 		  && readInt16(hdl, lon) && readInt16(hdl, lat)))
 			return false;
@@ -605,6 +601,10 @@ bool RGNFile::polyObjects(Handle &hdl, const SubDiv *subdiv,
 		Coordinates c(toWGS24(pos.x()), toWGS24(pos.y()));
 		poly.boundingRect = RectC(c, c);
 		poly.points.append(QPointF(c.lon(), c.lat()));
+
+		if (segmentType != Line) {
+            qWarning("%s: 0x%x , %f, %f line22222222", qPrintable(poly.label.text()), poly.type >> 8, c.lon(), c.lat());
+        }
 
 		qint32 lonDelta, latDelta;
 		DeltaStream stream(*this, hdl, len);
