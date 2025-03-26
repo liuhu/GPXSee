@@ -602,10 +602,6 @@ bool RGNFile::polyObjects(Handle &hdl, const SubDiv *subdiv,
 		poly.boundingRect = RectC(c, c);
 		poly.points.append(QPointF(c.lon(), c.lat()));
 
-		if (segmentType != Line) {
-            qWarning("%s: 0x%x , %f, %f line22222222", qPrintable(poly.label.text()), poly.type >> 8, c.lon(), c.lat());
-        }
-
 		qint32 lonDelta, latDelta;
 		DeltaStream stream(*this, hdl, len);
 		if (!stream.init(bitstreamInfo, labelPtr & 0x400000, false))
@@ -638,7 +634,9 @@ bool RGNFile::polyObjects(Handle &hdl, const SubDiv *subdiv,
 		}
 
         if (segmentType != Line) {
-            qWarning("%s: 0x%x , %f, %f line111111111", qPrintable(poly.label.text()), poly.type >> 8, c.lon(), c.lat());
+            for (const QPointF &p : poly.points) {
+                qWarning("%s: 0x%x , %f, %f line111111111", qPrintable(poly.label.text()), poly.type >> 8, p.x(), p.y());
+            }
         }
 		polys->append(poly);
 	}
@@ -758,7 +756,9 @@ bool RGNFile::extPolyObjects(Handle &hdl, const SubDiv *subdiv, quint32 shift,
 			  Style::isContourLine(poly.type));
 
 	    if (segmentType != Line) {
-           qWarning("%s: 0x%x , %f, %f xxxxx1111111", qPrintable(poly.label.text()), poly.type >> 8, c.lon(), c.lat());
+            for (const QPointF &p : poly.points) {
+               qWarning("%s: 0x%x , %f, %f line22222", qPrintable(poly.label.text()), poly.type >> 8, p.x(), p.y());
+            }
         }
 
 		polys->append(poly);
