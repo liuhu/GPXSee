@@ -634,7 +634,7 @@ bool RGNFile::polyObjects(Handle &hdl, const SubDiv *subdiv,
 		}
 
         if (segmentType != Line) {
-            qWarning("%s: 0x%x , %f, %f line11111111", qPrintable(poly.label.text()), poly.type >> 8, c.lon(), c.lat());
+            qWarning("%s: 0x%x , %f, %f line111111111", qPrintable(poly.label.text()), poly.type >> 8, c.lon(), c.lat());
         }
 		polys->append(poly);
 	}
