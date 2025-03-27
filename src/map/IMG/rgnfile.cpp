@@ -633,10 +633,9 @@ bool RGNFile::polyObjects(Handle &hdl, const SubDiv *subdiv,
 				  true, Style::isContourLine(poly.type));
 		}
 
-        if (segmentType != Line) {
-            for (const QPointF &p : poly.points) {
-                qWarning("%s: 0x%x , %f, %f line111111111", qPrintable(poly.label.text()), poly.type >> 8, p.x(), p.y());
-            }
+        qWarning("*************************************")
+        for (const QPointF &p : poly.points) {
+            qWarning("%s: 0x%x , %f, %f line111111111", qPrintable(poly.label.text()), poly.type >> 8, p.x(), p.y());
         }
 		polys->append(poly);
 	}
@@ -755,12 +754,10 @@ bool RGNFile::extPolyObjects(Handle &hdl, const SubDiv *subdiv, quint32 shift,
 			poly.label = lbl->label(lblHdl, labelPtr & 0x3FFFFF, false, true,
 			  Style::isContourLine(poly.type));
 
-	    if (segmentType != Line) {
-            for (const QPointF &p : poly.points) {
-               qWarning("%s: 0x%x , %f, %f line22222", qPrintable(poly.label.text()), poly.type >> 8, p.x(), p.y());
-            }
+        qWarning("------------------------------------")
+	    for (const QPointF &p : poly.points) {
+             qWarning("%s: 0x%x , %f, %f line22222", qPrintable(poly.label.text()), poly.type >> 8, p.x(), p.y());
         }
-
 		polys->append(poly);
 	}
 
