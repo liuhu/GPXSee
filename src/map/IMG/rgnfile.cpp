@@ -655,17 +655,21 @@ bool RGNFile::extPolyObjects(Handle &hdl, const SubDiv *subdiv, quint32 shift,
 
 
 	if (!segment.isValid())
+	    qWarning("line22222 - 1");
 		return true;
 	if (!seek(hdl, segment.offset()))
+	    qWarning("line22222 - 2");
 		return false;
 
 	while (pos(hdl) < segment.end()) {
+	    qWarning("line22222 - 3");
 		MapData::Poly poly;
 		QPoint pos;
 
 		if (!(readByte(hdl, &type) && readByte(hdl, &subtype)
 		  && readInt16(hdl, lon) && readInt16(hdl, lat)
 		  && readVUInt32(hdl, len)))
+	        qWarning("line22222 - 4");
 			return false;
 		Q_ASSERT(SubFile::pos(hdl) + len <= segment.end());
 
@@ -673,6 +677,7 @@ bool RGNFile::extPolyObjects(Handle &hdl, const SubDiv *subdiv, quint32 shift,
 		labelPtr = 0;
 
 		if (_huffmanTable) {
+		    qWarning("line22222 - 5");
 			pos = QPoint(LS(subdiv->lon(), 8) + LS(lon, 32-subdiv->bits()),
 			  LS(subdiv->lat(), 8) + LS(lat, (32-subdiv->bits())));
 
@@ -707,6 +712,7 @@ bool RGNFile::extPolyObjects(Handle &hdl, const SubDiv *subdiv, quint32 shift,
 			if (!(stream.atEnd() && bs.flush()))
 				return false;
 		} else {
+		    qWarning("line22222 - 6");
 			pos = QPoint(subdiv->lon() + LS(lon, 24-subdiv->bits()),
 			  subdiv->lat() + LS(lat, 24-subdiv->bits()));
 			Coordinates c(toWGS24(pos.x()), toWGS24(pos.y()));
